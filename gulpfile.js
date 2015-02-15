@@ -27,8 +27,13 @@ gulp.task('sass', function() {
  * Compile CoffeeScript
  */
 gulp.task('coffee', function() {
-	return gulp.src( paths.coffee + '/**/*.coffee' )
-		.pipe( $.coffee() )
+	return gulp.src( paths.coffee + '/**/*.cjsx' )
+		.pipe( $.cjsx({bare: true}) ).on('error', function(err) {
+			console.log("\n" + err.name + ": " + err.message + " in ", err.filename, "\n");
+			console.log("\nLines: " + err.location.first_line + "-" + err.location.last_line + " // Columns: " + err.location.first_column + "-" + err.location.last_column);
+			console.log("Stack trace: ", err.stack);
+			this.emit( 'end' );
+		})
 		.pipe( gulp.dest( paths.js ) )
 		.pipe( $.size({ title: "Compiled JavaScript", gzip: true }) );
 });
@@ -71,7 +76,7 @@ gulp.task('watch', ['serve'], function() {
 	});
 
 	gulp.watch( paths.sass + '/**/*.scss', ['sass'] );
-	gulp.watch( paths.coffee + '/**/*.coffee', ['coffee'] );
+	gulp.watch( paths.coffee + '/**/*.cjsx', ['coffee'] );
 });
 
 /**

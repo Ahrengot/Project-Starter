@@ -1,5 +1,13 @@
 body {
-  background: #f9f9f9; }
+  background: white; }
 
-body > .container-fluid:first-child {
+.app {
   margin-top: 15px; }
+
+.header-link.active {
+  color: black !important; }
+
+footer {
+  border-top: thin solid #eee;
+  margin: 9% 0;
+  padding: 5% 0; }
