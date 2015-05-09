@@ -3,16 +3,23 @@
   "description": "Bare-bones project starter using Gulp, Bootstrap, Sass and Underscore.js",
   "version": "0.0.1",
   "dependencies": {
+    "coffee-reactify": "^3.0.0",
     "connect": "^2.14.4",
     "connect-livereload": "^0.4.0",
     "gulp": "^3.6.0",
     "gulp-autoprefixer": "~0.0.7",
+    "gulp-browserify": "^0.5.1",
     "gulp-cjsx": "^2.0.0",
     "gulp-coffee": "~2.0.1",
     "gulp-livereload": "~2.1.0",
     "gulp-load-plugins": "^0.5.0",
     "gulp-sass": "~0.7.2",
     "gulp-size": "^0.3.0",
-    "opn": "^0.1.1"
+    "gulp-util": "^3.0.4",
+    "opn": "^0.1.1",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.0",
+    "reflux": "^0.2.7"
   }
 }
