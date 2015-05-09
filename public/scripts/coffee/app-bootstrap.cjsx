@@ -1,14 +1,20 @@
-define ['react', 'react-router', 'components/app', 'components/index-page', 'components/dummy-page'], (React, Router, App, IndexPage, DummyPage) ->
+React = require 'react'
+Router = require 'react-router'
 
-	DefaultRoute = Router.DefaultRoute
-	Route = Router.Route
+App = require './components/app'
+IndexPage = require './components/index-page'
+DummyPage = require './components/dummy-page'
 
-	routes =
-		<Route name="app" path="/" handler={ App }>
-			<Route name="dummy-page" path="/dummy-page" handler={ DummyPage } />
-			<DefaultRoute handler={ IndexPage } />
-		</Route>
+# Change this to destructured assignment
+DefaultRoute = Router.DefaultRoute
+Route = Router.Route
 
-	# Start listening for route changes
-	Router.run routes, (Handler) ->
-		React.render( <Handler />, document.body )
+routes =
+	<Route name="app" path="/" handler={ App }>
+		<Route name="dummy-page" path="/dummy-page" handler={ DummyPage } />
+		<DefaultRoute handler={ IndexPage } />
+	</Route>
+
+# Start listening for route changes
+Router.run routes, (Handler) ->
+	React.render( <Handler />, document.body )

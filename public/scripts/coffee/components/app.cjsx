@@ -1,11 +1,16 @@
-define ['react', 'react-router', 'components/header', 'components/footer'], (React, Router, Header, Footer ) ->
+React = require 'react'
+Router = require 'react-router'
+Header = require './header'
+Footer = require './footer'
 
-	RouteHandler = Router.RouteHandler
+RouteHandler = Router.RouteHandler
 
-	React.createClass
-		render: ->
-			<div className="app">
-				<Header />
-				<RouteHandler />
-				<Footer />
-			</div>
+App = React.createClass
+	render: ->
+		<div className="app">
+			<Header />
+			<RouteHandler />
+			<Footer />
+		</div>
+
+module.exports = App
