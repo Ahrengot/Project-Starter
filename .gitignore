@@ -1,8 +1,8 @@
 # Folders
 node_modules
 bower_components
-scripts/js
-styles/css
+public/scripts/js
+public/styles/css
 
 # Files
 img/**
