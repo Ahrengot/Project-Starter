@@ -1,4 +1,5 @@
 var gulp = require( 'gulp' );
+var _ = require( 'underscore' );
 
 // Load plugins
 var $ = require( 'gulp-load-plugins' )();
@@ -23,19 +24,21 @@ gulp.task('sass', function() {
 		.pipe( $.size({ title: "Compiled CSS", gzip: true }) );
 });
 
-/**
- * Compile CoffeeScript
- */
-gulp.task('coffee', function() {
-	return gulp.src( paths.coffee + '/**/*.cjsx' )
-		.pipe( $.cjsx({bare: true}) ).on('error', function(err) {
+gulp.task('browserify', function(){
+	return gulp.src( paths.coffee + "/app-bootstrap.cjsx", {read: false} )
+		.pipe($.browserify({
+			transform: ['coffee-reactify'],
+			extensions: ['.cjsx', '.coffee']
+		}))
+		.on('error', function(err){
 			console.log("\n" + err.name + ": " + err.message + " in ", err.filename, "\n");
 			console.log("\nLines: " + err.location.first_line + "-" + err.location.last_line + " // Columns: " + err.location.first_column + "-" + err.location.last_column);
 			console.log("Stack trace: ", err.stack);
 			this.emit( 'end' );
 		})
-		.pipe( gulp.dest( paths.js ) )
-		.pipe( $.size({ title: "Compiled JavaScript", gzip: true }) );
+		.pipe($.rename('combined.js'))
+		.pipe(gulp.dest( paths.js ))
+	    .pipe( $.size({ title: "Compiled JavaScript", gzip: true }) );
 });
 
 /**
@@ -56,7 +59,7 @@ gulp.task('connect', function () {
 /**
  * Compile assets and open url in browser
  */
-gulp.task('serve', ['sass', 'coffee', 'connect'], function () {
+gulp.task('serve', ['sass', 'browserify', 'connect'], function () {
 	require( 'opn' )( 'http://localhost:9000' );
 });
 
@@ -76,7 +79,7 @@ gulp.task('watch', ['serve'], function() {
 	});
 
 	gulp.watch( paths.sass + '/**/*.scss', ['sass'] );
-	gulp.watch( paths.coffee + '/**/*.cjsx', ['coffee'] );
+	gulp.watch( paths.coffee + '/**/*.cjsx', ['browserify'] );
 });
 
 /**
