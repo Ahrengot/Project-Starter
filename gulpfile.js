@@ -1,5 +1,14 @@
-var gulp = require( 'gulp' );
+var gulp = require('gulp');
+var gutil = require('gulp-util');
 var _ = require( 'underscore' );
+
+var webpack = require("webpack");
+var WebpackDevServer = require("webpack-dev-server");
+var webpackConfig = require("./webpack.config.js");
+var webpackProductionConfig = require("./webpack.production.config.js");
+
+var touch = require('touch');
+var map = require('map-stream');
 
 // Load plugins
 var $ = require( 'gulp-load-plugins' )();
@@ -8,8 +17,7 @@ var $ = require( 'gulp-load-plugins' )();
 var paths = {
 	sass: './public/styles/sass',
 	css: './public/styles/css',
-	coffee: './public/scripts/coffee',
-	js: './public/scripts/js',
+	coffee: './public/scripts',
 	app: './public'
 }
 
@@ -21,65 +29,88 @@ gulp.task('sass', function() {
 		.pipe( $.sass() )
 		.pipe( $.autoprefixer( 'last 2 versions' ) )
 		.pipe( gulp.dest( paths.css ) )
-		.pipe( $.size({ title: "Compiled CSS", gzip: true }) );
-});
-
-gulp.task('browserify', function(){
-	return gulp.src( paths.coffee + "/app-bootstrap.cjsx", {read: false} )
-		.pipe($.browserify({
-			transform: ['coffee-reactify'],
-			extensions: ['.cjsx', '.coffee']
-		}))
-		.on('error', function(err){
-			console.log("\n" + err.name + ": " + err.message + " in ", err.filename, "\n");
-			console.log("\nLines: " + err.location.first_line + "-" + err.location.last_line + " // Columns: " + err.location.first_column + "-" + err.location.last_column);
-			console.log("Stack trace: ", err.stack);
-			this.emit( 'end' );
-		})
-		.pipe($.rename('combined.js'))
-		.pipe(gulp.dest( paths.js ))
-	    .pipe( $.size({ title: "Compiled JavaScript", gzip: true }) );
+		.pipe( $.size({ title: "Compiled CSS", gzip: true }) )
+		.pipe( map(function(a, cb) {
+				if (devServer.invalidate) {
+					devServer.invalidate();
+				}
+				cb();
+			})
+		);
 });
 
 /**
- * Tiny HTTP server with connect
+ * Configure Webpack for hot loading, production and
+ * serving of assets
  */
-gulp.task('connect', function () {
-	var connect = require('connect');
-	var app = connect()
-		.use( require('connect-livereload')({ port: 35729 }) )
-		.use( connect.static( paths.app ) )
-		.use( connect.directory( paths.app ) );
+gulp.task("webpack:build", ['sass'], function(callback) {
+	webpack(webpackProductionConfig, function(err, stats) {
+		if (err) {
+			throw new gutil.PluginError("webpack:build", err);
+		}
+		gutil.log("[webpack:build]", stats.toString({colors: true}));
+		callback();
+	});
+});
 
-	require('http').createServer(app).listen( 9000 ).on('listening', function () {
-		console.log('Started connect web server on http://localhost:9000');
+
+// Create a single instance of the compiler to allow caching.
+var devCompiler = webpack(webpackConfig);
+gulp.task("webpack:build-dev", ['sass'], function(callback) {
+	devCompiler.run(function(err, stats) {
+		if (err) {
+			throw new gutil.PluginError("webpack:build-dev", err);
+		}
+		gutil.log("[webpack:build-dev]", stats.toString({colors: true}));
+		callback();
+	});
+});
+
+var devServer = {}
+gulp.task("webpack-dev-server", ['sass'], function(callback) {
+	touch.sync('./public/styles/css/main.css', {
+		time: new Date(0)
+	});
+
+	// Start a webpack-dev-server.
+	devServer = new WebpackDevServer(webpack(webpackConfig), {
+		contentBase: './public/',
+		hot: true,
+		watchDelay: 100,
+		noInfo: true
+	});
+
+	devServer.listen(8080, "0.0.0.0", function(err) {
+		if (err) {
+			throw new gutil.PluginError("webpack-dev-server", err);
+		}
+		gutil.log("[webpack-dev-server]", "http://localhost:8080");
+		callback();
 	});
 });
 
 /**
  * Compile assets and open url in browser
  */
-gulp.task('serve', ['sass', 'browserify', 'connect'], function () {
-	require( 'opn' )( 'http://localhost:9000' );
+gulp.task('serve', ['sass', 'webpack-dev-server'], function () {
+	require( 'opn' )( 'http://localhost:8080' );
 });
 
 /**
  * Set up file watching and live browser reloading
  */
-gulp.task('watch', ['serve'], function() {
+gulp.task('watch', ['webpack-dev-server'], function() {
 	var server = $.livereload();
 
 	// Watch for changes to compiled files
 	gulp.watch([
 		paths.app + '/*.html',
 		paths.css + '/**/*.css',
-		paths.js + '/**/*.js',
 	]).on('change', function(file) {
 		server.changed(file.path);
 	});
 
 	gulp.watch( paths.sass + '/**/*.scss', ['sass'] );
-	gulp.watch( paths.coffee + '/**/*.cjsx', ['browserify'] );
 });
 
 /**

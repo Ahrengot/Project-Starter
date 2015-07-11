@@ -2,16 +2,11 @@ body {
 	background: white;
 }
 
-.app {
-	margin-top: 15px;
+body > .container {
+	margin-top: 1em;
 }
 
-.header-link.active {
+a.active {
 	color: black !important;
 }
 
-footer {
-	border-top: thin solid #eee;
-	margin: 9% 0;
-	padding: 5% 0;
-}
