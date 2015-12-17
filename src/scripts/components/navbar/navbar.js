@@ -1,7 +1,19 @@
 import Styles from './navbar.css'
 import { Link, IndexLink } from 'react-router'
 
+let links = [
+	{ path: "to-do", label: "Todo list" },
+	{ path: "about", label: "About" },
+]
+
 export default React.createClass({
+	renderLink(link) {
+		return (
+			<li className="nav-item" key={ link.path }>
+				<Link to={ link.path } activeClassName={ Styles.active }>{ link.label }</Link>
+			</li>
+		)
+	},
 	render() {
 		return (
 			<div className="col-xs-12">
@@ -11,9 +23,7 @@ export default React.createClass({
 						<li className="nav-item">
 							<IndexLink to="/" activeClassName={ Styles.active }>Welcome</IndexLink>
 						</li>
-						<li className="nav-item">
-							<Link to="about" activeClassName={ Styles.active }>About</Link>
-						</li>
+						{ links.map( this.renderLink ) }
 					</ul>
 				</nav>
 			</div>

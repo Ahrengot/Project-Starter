@@ -1,0 +1,15 @@
+.form {
+	margin-top: 2rem;
+}
+
+.todo {
+	list-style: none;
+	cursor: pointer;
+	color: #444;
+	font: italic 1.5rem/1.35 "Georgia", serif;
+}
+
+.disabled {
+	opacity: 0.4;
+	text-decoration: line-through;
+}

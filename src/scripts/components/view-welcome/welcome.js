@@ -12,13 +12,13 @@ export default React.createClass({
 						</h3>
 					</header>
 					<ul className={ Styles['feature-list'] }>
-						<li>Webpack</li>
-						<li>React.js</li>
-						<li>Redux + Dev tools</li>
-						<li>React Router</li>
-						<li>PostCSS loader for JS components</li>
 						<li>Hot module replacement</li>
+						<li>Redux + Redux dev tools</li>
+						<li>React.js</li>
+						<li>React Router</li>
+						<li>PostCSS loader for JS</li>
 						<li>SVG Sprites</li>
+						<li>Webpack</li>
 						<li>Browserify (easy debugging on multiple devices)</li>
 						<li>Bootstrap 4 alpha (Sass version)</li>
 					</ul>
