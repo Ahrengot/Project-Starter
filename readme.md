@@ -10,6 +10,10 @@
 * Browserify (easy debugging on multiple devices)
 * Bootstrap 4 alpha (Sass version)
 
+### Todo
+- [ ] Add redux dev tools
+- [ ] Use store provide instead of manually importing store
+
 ### To get started run these commands
 
 1. `$ npm install`

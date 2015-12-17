@@ -6,10 +6,3 @@ import { combineReducers } from 'redux'
 export default combineReducers({
 	todos: TodoReducer
 })
-
-/* The above is a helper that basically generates this:
-export default (state = {}, action) => {
-	return {
-		todos: TodoReducer(state.todos, action)
-	}
-}*/

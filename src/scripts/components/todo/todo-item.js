@@ -12,6 +12,12 @@ export default React.createClass({
 			title: this.props.title.split('').reverse().join('')
 		})
 	},
+	onClickDelete() {
+		Store.dispatch({
+			type: 'DELETE_TODO',
+			id: this.props.id
+		})
+	},
 	render() {
 		let className = Styles.todo;
 		if ( this.props.disabled ) {
@@ -19,7 +25,10 @@ export default React.createClass({
 		}
 
 		return (
-			<li className={ className } onClick={ this.onClick } data-disabled={ this.props.disabled }>{ this.props.title }</li>
+			<li className={ className } onClick={ this.onClick } data-disabled={ this.props.disabled }>
+				{ this.props.title }
+				<span className={ Styles.deleteBtn } onClick={ this.onClickDelete }>&times;</span>
+			</li>
 		)
 	}
 })

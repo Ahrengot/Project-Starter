@@ -20,8 +20,9 @@ export default (state = defaultState, action) => {
 		case 'CREATE_TODO':
 			return state.concat(createItem(action.title));
 		case 'DELETE_TODO':
-			console.log("Delete Item!", action);
-			break;
+			return state.filter((todo) => {
+				return (todo.id !== action.id);
+			})
 		case 'UPDATE_TODO':
 			return state.map((todo) => {
 				if (todo.id !== action.id) {
