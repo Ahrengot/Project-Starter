@@ -25,7 +25,7 @@ export default React.createClass({
 		}
 
 		return (
-			<li className={ className } onClick={ this.onClick } data-disabled={ this.props.disabled }>
+			<li className={ className } onClick={ this.onClick }>
 				{ this.props.title }
 				<span className={ Styles.deleteBtn } onClick={ this.onClickDelete }>&times;</span>
 			</li>
