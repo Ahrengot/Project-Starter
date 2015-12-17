@@ -1,0 +1,5 @@
+src/scripts/lib
+src/scripts/util/scroller.js
+src/scripts/panels/ambassador-panel.js
+src/scripts/util/spriteanim.js
+src/scripts/util/event-emitter.js

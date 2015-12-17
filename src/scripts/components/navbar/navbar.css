@@ -1,0 +1,22 @@
+.navbar {
+	margin-top: 1rem;
+}
+
+.navbar ul a {
+	color: #333;
+	text-decoration: none;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 32px;
+}
+
+a.active {
+	color: #008152;
+	border-bottom: 2px solid #008152;
+}
+
+.indexLink {
+	margin-right: 1.5rem;
+	border-right: thin solid #ccc;
+	padding-right: 1.5rem;
+}

@@ -1,0 +1,54 @@
+$brand-primary: #00b472;
+$brand-secondary: #22589d;
+$gray: #24282D;
+
+$body-color: #323232;
+$headings-color: #101010;
+
+// Enable flexbox grid system
+$enable-flex: false;
+
+/**
+ * Typography
+ */
+$font-size-root: 14px;
+$line-height: 1.4;
+
+$font-family-sans-serif: 'Helvetica Neue', sans-serif;
+$headings-font-family: $font-family-sans-serif;
+
+$font-family-serif: Georgia, serif;
+$font-family-base: $font-family-sans-serif;
+
+$headings-font-weight: bold;
+$font-size-h1: 25px;
+$font-size-h2: 18px;
+$font-size-h3: $font-size-h2;
+
+$link-color: $brand-primary;
+$link-hover-color: darken($link-color, 10%);
+$link-hover-decoration: underline;
+
+/**
+ * Buttons
+ */
+$btn-primary-color:              #fff;
+$btn-primary-bg:                 $brand-primary;
+$btn-primary-border:             $btn-primary-bg;
+
+$btn-secondary-color:            white;
+$btn-secondary-bg:               $brand-secondary;
+$btn-secondary-border:           $brand-secondary;
+$btn-padding-x: .375rem;
+$btn-padding-y: 12px;
+
+/**
+ * Components
+ */
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
+
+$btn-border-radius: $border-radius;
+$btn-border-radius-lg: $border-radius-lg;
+$btn-border-radius-sm: $border-radius-sm;
