@@ -144,6 +144,7 @@ gulp.task('rev', function() {
 
 	return gulp.src( resources )
 		.pipe( $.rev() )
+		.pipe( $.revDeleteOriginal() )
 		.pipe( gulp.dest( paths.dist ) )
 		.pipe( $.rev.manifest() )
 		.pipe( gulp.dest( paths.dist ) );
