@@ -1,0 +1,37 @@
+{
+	"folders":
+	[
+		{
+			"name": "/",
+			"path": ".",
+			"folder_exclude_patterns": [
+				"node_modules",
+				"dist",
+				"src"
+			]
+		},
+		{
+			"name": "src",
+			"path": "src",
+			"folder_exclude_patterns": [
+				"styles",
+				"scripts"
+			]
+		},
+		{
+			"name": "components",
+			"path": "src/scripts/components"
+		},
+		{
+			"name": "styles",
+			"path": "src/styles"
+		},
+		{
+			"name": "scripts",
+			"path": "src/scripts",
+			"folder_exclude_patterns": [
+				"components"
+			]
+		}
+	]
+}

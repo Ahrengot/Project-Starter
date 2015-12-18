@@ -1,0 +1,1 @@
+﻿export default React.createClass({	render() {		return (			<svg { ...this.props } >				{ React.createElement('use', { 'xlink:href': '#' + this.props.id, style: { fill: this.props.color } }) }			</svg>		);	}});

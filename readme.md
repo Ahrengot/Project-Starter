@@ -1,10 +1,16 @@
-## Project starter
-A base template with nothing more than Bootstrap (Sass) & Underscore.js
+## Project starter with the following
 
-Gulp is used to run tasks and there's a small server that'll run your project on localhost:9000 using Connect and LiveReload.
+* Webpack
+* React.js
+* Redux + Dev tools
+* React Router
+* PostCSS loader for JS components
+* Hot module replacement
+* SVG Sprites
+* Browserify (easy debugging on multiple devices)
+* Bootstrap 4 alpha (Sass version)
 
-To get started, just run these commands:
+### To get started run these commands
 
 1. `$ npm install`
-2. `$ bower install`
 3. `$ gulp`
