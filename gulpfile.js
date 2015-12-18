@@ -3,7 +3,6 @@ var gulp = require('gulp');
 var runSequence = require('run-sequence');
 var $ = require( 'gulp-load-plugins' )();
 var del = require('del');
-var replace = require('gulp-replace');
 
 // Browsersync
 var browserSync = require('browser-sync').create();
