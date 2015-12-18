@@ -1,9 +1,9 @@
 {
   "name": "project-starter",
   "description": "Project starter",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
-    "history": "^1.13.1",
+    "history": "1.13.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-fastclick": "git://github.com/jakesidsmith/react-fastclick.git#react-0.14-support",
