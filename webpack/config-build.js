@@ -14,6 +14,9 @@ module.exports = _.extend(_.omit(defaultConf, 'debug', 'devtool', 'context', 'en
 	},
     plugins: defaultConf.plugins.concat([
 		new webpack.optimize.DedupePlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {'NODE_ENV': '"production"'}
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false

@@ -30,8 +30,8 @@ let TodoItem = React.createClass({
 		}
 
 		return (
-			<li className={ className } onClick={ this.onClick } data-disabled={ this.props.disabled }>
-				{ this.props.title }
+			<li className={ className } data-disabled={ this.props.disabled }>
+				<span onClick={ this.onClick }>{ this.props.title }</span>
 				<span className={ Styles.deleteBtn } onClick={ this.onClickDelete }>&times;</span>
 			</li>
 		)
