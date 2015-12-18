@@ -1,0 +1,17 @@
+/**
+ * Base styling for views. Centered and 100% view height
+ */
+
+.view {
+	height: calc(100vh - #{$navbar-height});
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.view-content {
+	margin: inherit auto;
+	width: 100%;
+	max-width: 550px;
+	text-align: center;
+}

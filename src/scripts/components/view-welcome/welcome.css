@@ -1,0 +1,17 @@
+.feature-list {
+	list-style: none;
+	padding: 0;
+
+	line-height: 1.7;
+}
+.feature-list li:before {
+	content: "";
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 0.5em;
+
+	width: 7px;
+	height: 7px;
+	background-color: #008152;
+	border-radius: 50%;
+}
