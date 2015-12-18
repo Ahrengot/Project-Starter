@@ -22,7 +22,7 @@ syncReduxAndRouter(history, store);
 
 // Redux dev tools
 let DevTools = null;
-if (process.env.NODE_ENV !== 'production') {
+if (typeof __ENV__ !== 'undefined' && __ENV__ === 'development') {
   DevTools = require('./components/devtools').default;
 }
 

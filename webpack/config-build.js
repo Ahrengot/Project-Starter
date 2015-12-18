@@ -5,22 +5,23 @@ var path = require("path");
 var webpack = require("webpack");
 var paths = require('../paths');
 
-module.exports = _.extend(_.omit(defaultConf, 'debug', 'devtool', 'context', 'entry'), {
+module.exports = _.extend(_.omit(defaultConf, 'debug', 'devtool', 'context', 'entry', 'plugins'), {
 	output: {
 		filename: 'combined.min.js'
 	},
-	resolveLoader: {
-		modulesDirectories: ['node_modules']
-	},
-    plugins: defaultConf.plugins.concat([
+	plugins: [
 		new webpack.optimize.DedupePlugin(),
 		new webpack.DefinePlugin({
-			'process.env': {'NODE_ENV': '"production"'}
+			__ENV__: JSON.stringify('production'),
+		}),
+		new webpack.ProvidePlugin({
+			React: 'react',
+			ReactDOM: 'react-dom'
 		}),
 		new webpack.optimize.UglifyJsPlugin({
 			compress: {
 				warnings: false
 			}
 		}),
-    ])
+    ]
 });

@@ -11,9 +11,9 @@ var browserSync = require('browser-sync').create();
 // Webpack
 var webpack = require("webpack");
 var webpackStream = require("webpack-stream");
-var webpackConfig = require("./webpack/config.js");
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var webpackConfig = require("./webpack/config.js");
 var webpackBuildConfig = require("./webpack/config-build.js");
 
 // linting
