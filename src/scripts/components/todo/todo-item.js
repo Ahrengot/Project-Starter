@@ -1,11 +1,16 @@
 import _ from 'underscore'
+import { connect } from 'react-redux'
 
 import Styles from './todo-list.css'
-import Store from '../../stores/app-store'
 
-export default React.createClass({
+let TodoItem = React.createClass({
+	propTypes: {
+		dispatch: React.PropTypes.func,
+		disabled: React.PropTypes.bool,
+		title: React.PropTypes.string,
+	},
 	onClick() {
-		Store.dispatch({
+		this.props.dispatch({
 			type: 'UPDATE_TODO',
 			id: this.props.id,
 			disabled: !this.props.disabled,
@@ -13,7 +18,7 @@ export default React.createClass({
 		})
 	},
 	onClickDelete() {
-		Store.dispatch({
+		this.props.dispatch({
 			type: 'DELETE_TODO',
 			id: this.props.id
 		})
@@ -32,3 +37,7 @@ export default React.createClass({
 		)
 	}
 })
+
+export default connect(state => {
+	return {}
+})(TodoItem)

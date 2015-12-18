@@ -1,9 +1,13 @@
+import { connect } from 'react-redux'
+
 import Styles from './todo-list.css'
 import Item from './todo-item';
 
-import Store from '../../stores/app-store';
-
-export default React.createClass({
+let TodoList = React.createClass({
+	propTypes: {
+		todos: React.PropTypes.arrayOf(React.PropTypes.object),
+		dispatch: React.PropTypes.func,
+	},
 	onSubmitForm(e) {
 		e.preventDefault();
 
@@ -12,7 +16,7 @@ export default React.createClass({
 			return;
 		}
 
-		Store.dispatch({
+		this.props.dispatch({
 			type: 'CREATE_TODO',
 			title: this.refs.input.value,
 		})
@@ -24,7 +28,7 @@ export default React.createClass({
 		return (
 			<div>
 				<div>
-					{ Store.getState().todos.map( item => {
+					{ this.props.todos.map( item => {
 						return <Item key={ item.id } { ...item } />;
 					})}
 				</div>
@@ -37,8 +41,11 @@ export default React.createClass({
 	},
 	componentDidMount() {
 		this.refs.input.focus();
-		this.unsubscribe = Store.subscribe(() => {
-			this.forceUpdate();
-		});
 	}
 })
+
+export default connect(state => {
+	return {
+		todos: state.todos
+	}
+})(TodoList)

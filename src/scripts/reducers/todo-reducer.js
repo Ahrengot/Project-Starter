@@ -32,7 +32,6 @@ export default (state = defaultState, action) => {
 				return updateTodo(todo, _.omit(action, 'type', 'id'));
 			})
 		default:
-			console.warn("Unrecognized action: ", action);
 			return state;
 	}
 }
