@@ -7,7 +7,7 @@
 * PostCSS loader for JS components
 * Hot module replacement
 * SVG Sprites
-* Browserify (easy debugging on multiple devices)
+* Browser Sync (easy debugging on multiple devices)
 * Bootstrap 4 alpha (Sass version)
 
 ### To get started run these commands
